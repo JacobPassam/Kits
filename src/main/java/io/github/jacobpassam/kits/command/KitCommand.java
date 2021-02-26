@@ -30,11 +30,8 @@ public class KitCommand implements CommandExecutor {
 
         String kitName = args[0];
 
-        if (!kitManager.exists(kitName)) {
-            player.sendMessage("That kit does not exist.");
-        } else {
-            kitManager.giveKitToPlayer(player, kitName);
-        }
+        if (!kitManager.exists(kitName)) player.sendMessage("That kit does not exist.");
+        else kitManager.giveKitToPlayer(player, kitName);
 
         return true;
     }

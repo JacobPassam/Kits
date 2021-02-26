@@ -2,9 +2,8 @@ package io.github.jacobpassam.kits.time;
 
 import com.google.common.collect.Maps;
 import io.github.jacobpassam.kits.kit.Kit;
-import io.github.jacobpassam.kits.time.data.KitRepository;
+import io.github.jacobpassam.kits.time.storage.KitRepository;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 

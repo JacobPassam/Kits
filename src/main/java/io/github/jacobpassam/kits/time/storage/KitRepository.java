@@ -1,4 +1,4 @@
-package io.github.jacobpassam.kits.time.data;
+package io.github.jacobpassam.kits.time.storage;
 
 import io.github.jacobpassam.kits.kit.Kit;
 import io.github.jacobpassam.kits.time.PlayerKitData;
@@ -8,7 +8,7 @@ import java.util.UUID;
 /**
  * Represents a data repository in which Kit timeouts are stored permanently. Ideally, this would be stored in a database.
  *
- * @see io.github.jacobpassam.kits.time.data.impl.KitMemoryRepository
+ * @see io.github.jacobpassam.kits.time.storage.impl.KitMemoryRepository
  */
 public interface KitRepository {
 

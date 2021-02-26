@@ -1,8 +1,8 @@
-package io.github.jacobpassam.kits.time.data.impl;
+package io.github.jacobpassam.kits.time.storage.impl;
 
 import io.github.jacobpassam.kits.kit.Kit;
 import io.github.jacobpassam.kits.time.PlayerKitData;
-import io.github.jacobpassam.kits.time.data.KitRepository;
+import io.github.jacobpassam.kits.time.storage.KitRepository;
 
 import java.util.UUID;
 

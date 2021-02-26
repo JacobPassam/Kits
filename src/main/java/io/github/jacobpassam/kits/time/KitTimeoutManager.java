@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface KitTimeoutManager extends Listener {
 
     /**
-     * Loads a PlayerKitData into cache from the {@link io.github.jacobpassam.kits.time.data.KitRepository}.
+     * Loads a PlayerKitData into cache from the {@link io.github.jacobpassam.kits.time.storage.KitRepository}.
      *
      * @param uuid The UUID of the player whose data is to be loaded.
      */
@@ -34,7 +34,7 @@ public interface KitTimeoutManager extends Listener {
 
     /**
      * Write a usage of this Kit into the cached {@link PlayerKitData} object and
-     * the {@link io.github.jacobpassam.kits.time.data.KitRepository}.
+     * the {@link io.github.jacobpassam.kits.time.storage.KitRepository}.
      *
      * @param uuid The UUID of the player who has used the Kit.
      * @param kit  The Kit which has been used.

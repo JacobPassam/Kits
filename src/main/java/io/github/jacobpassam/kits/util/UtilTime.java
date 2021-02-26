@@ -1,19 +1,7 @@
-/*
- * Copyright © Minedroid Network 2020
- *
- * You may not use, distribute, or share this code under any circumstances
- * without explicit permission from Minedroid Network. All source code and
- * binaries are owned by Minedroid Network.
- *
- * All rights reserved.
- */
-
 package io.github.jacobpassam.kits.util;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -22,45 +10,22 @@ import java.util.Locale;
 public class UtilTime {
 
     /**
-     * Formats a date using the format DAY-MONTH-YEAR HOUR-MINUTE-SECOND
-     *
-     * @param date The date to format, in milliseconds.
-     * @return The formatted date string.
-     */
-    public static String formatDate(long date) {
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        return format.format(new Date(date));
-    }
-
-    /**
      * Default method to convert time to a string, rounding to 1DP.
      *
      * @param time The time to convert, in milliseconds.
      * @return A formatted string.
      */
     public static String timeToString(long time) {
-        return convertString(time, 1);
-    }
-
-    /**
-     * Method to convert time to a string, rounding to the specified amount.
-     *
-     * @param time The time to convert, in milliseconds.
-     * @param trim The amount of decimal places to round the result to.
-     * @return A formatted string.
-     */
-    public static String timeToString(long time, int trim) {
-        return convertString(Math.max(0, time), trim);
+        return convertString(time);
     }
 
     /**
      * Converts a time to a string.
      *
      * @param time The time to convert, in milliseconds.
-     * @param trim The amount of decimal places to round the result to.
      * @return A formatted string.
      */
-    private static String convertString(long time, int trim) {
+    private static String convertString(long time) {
         if (time == -1) return "Permanent";
 
         TimeUnit timeUnit;
@@ -73,35 +38,18 @@ public class UtilTime {
         String fullText;
         double numToDisplay;
 
-        if (trim == 0) {
-            // Round to an int.
-            if (timeUnit == TimeUnit.DAYS) {
-                numToDisplay = trimDecimal(trim, time / 86400000D);
-                fullText = (int) numToDisplay + " day";
-            } else if (timeUnit == TimeUnit.HOURS) {
-                numToDisplay = trimDecimal(trim, time / 3600000D);
-                fullText = (int) numToDisplay + " hour";
-            } else if (timeUnit == TimeUnit.MINUTES) {
-                numToDisplay = trimDecimal(trim, time / 60000D);
-                fullText = (int) numToDisplay + " minute";
-            } else {
-                numToDisplay = trimDecimal(trim, time / 1000D);
-                fullText = (int) numToDisplay + " second";
-            }
+        if (timeUnit == TimeUnit.DAYS) {
+            numToDisplay = trimDecimal(time / 86400000D);
+            fullText = numToDisplay + " day";
+        } else if (timeUnit == TimeUnit.HOURS) {
+            numToDisplay = trimDecimal(time / 3600000D);
+            fullText = numToDisplay + " hour";
+        } else if (timeUnit == TimeUnit.MINUTES) {
+            numToDisplay = trimDecimal(time / 60000D);
+            fullText = numToDisplay + " minute";
         } else {
-            if (timeUnit == TimeUnit.DAYS) {
-                numToDisplay = trimDecimal(trim, time / 86400000D);
-                fullText = numToDisplay + " day";
-            } else if (timeUnit == TimeUnit.HOURS) {
-                numToDisplay = trimDecimal(trim, time / 3600000D);
-                fullText = numToDisplay + " hour";
-            } else if (timeUnit == TimeUnit.MINUTES) {
-                numToDisplay = trimDecimal(trim, time / 60000D);
-                fullText = numToDisplay + " minute";
-            } else {
-                numToDisplay = trimDecimal(trim, time / 1000D);
-                fullText = numToDisplay + " second";
-            }
+            numToDisplay = trimDecimal(time / 1000D);
+            fullText = numToDisplay + " second";
         }
 
         if (numToDisplay != 1)
@@ -113,17 +61,13 @@ public class UtilTime {
     /**
      * Trims a decimal by a degree of places.
      *
-     * @param degree The amount to trim by.
      * @param d      The decimal to trim.
      * @return The trimmed decimal.
      */
-    private static double trimDecimal(int degree, double d) {
-        StringBuilder format = new StringBuilder("#.#");
-
-        for (int i = 1; i < degree; i++) format.append("#");
+    private static double trimDecimal(double d) {
 
         DecimalFormatSymbols symb = new DecimalFormatSymbols(Locale.ENGLISH);
-        DecimalFormat twoDForm = new DecimalFormat(format.toString(), symb);
+        DecimalFormat twoDForm = new DecimalFormat("#.#", symb);
         return Double.parseDouble(twoDForm.format(d));
     }
 
@@ -134,7 +78,6 @@ public class UtilTime {
         DAYS,
         HOURS,
         MINUTES,
-        SECONDS,
-        MILLISECONDS
+        SECONDS
     }
 }
